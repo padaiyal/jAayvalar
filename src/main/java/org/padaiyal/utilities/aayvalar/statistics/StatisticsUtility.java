@@ -92,9 +92,8 @@ public class StatisticsUtility {
   }
 
   /**
-   * Get the mode from the provided collection.
-   * Mode is the most frequent number in a collection of numbers.
-   * For more information: https://en.wikipedia.org/wiki/Mode
+   * Get the mode from the provided collection. Mode is the most frequent number in a collection of
+   * numbers. For more information: https://en.wikipedia.org/wiki/Mode
    *
    * @param inputCollection The collection to retrieve the mode from.
    * @return The mode from the provided collection.
@@ -104,9 +103,9 @@ public class StatisticsUtility {
   }
 
   /**
-   * Get the frequency distribution of elements from the provided collection.
-   * Frequency distribution is a graph that displays the frequency of a collection.
-   * For more information: https://en.wikipedia.org/wiki/Frequency_distribution
+   * Get the frequency distribution of elements from the provided collection. Frequency distribution
+   * is a graph that displays the frequency of a collection. For more information:
+   * https://en.wikipedia.org/wiki/Frequency_distribution
    *
    * @param inputCollection The collection to retrieve its elements frequency.
    * @return The frequency distribution of the elements in the provided collection.
@@ -224,9 +223,8 @@ public class StatisticsUtility {
   }
 
   /**
-   * Gets the variance from the provided collection.
-   * The variance is the measure of variability in a collection of numbers.
-   * For more information: https://en.wikipedia.org/wiki/Variance
+   * Gets the variance from the provided collection. The variance is the measure of variability in a
+   * collection of numbers. For more information: https://en.wikipedia.org/wiki/Variance
    *
    * @param inputCollection The input collection to retrieve variance.
    * @param meanType        The mean type to use for calculation.
@@ -244,8 +242,8 @@ public class StatisticsUtility {
   }
 
   /**
-   * Gets the standard deviation from the provided collection.
-   * The standard deviation is the measurement of variation of collection of values.
+   * Gets the standard deviation from the provided collection. The standard deviation is the
+   * measurement of variation of collection of values.
    *
    * @param inputCollection The input collection to retrieve the standard deviation.
    * @param meanType        The mean type to use for calculation.
@@ -255,4 +253,15 @@ public class StatisticsUtility {
       MeanType meanType) {
     return Math.sqrt(getVariance(inputCollection, meanType));
   }
+
+  /**
+   * Gets the trend type of two-dimensional array of numbers.
+   *
+   * @param inputArray The two-dimensional array.
+   * @return The trend type of the array.
+   */
+  public static TrendType getTrendType(Number[][] inputArray) {
+    return TrendType.UNKNOWN;
+  }
+
 }
