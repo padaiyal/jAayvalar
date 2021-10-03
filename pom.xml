@@ -6,7 +6,7 @@
 
   <groupId>org.padaiyal.utilities</groupId>
   <artifactId>aayvalar</artifactId>
-  <version>2021.05.02</version>
+  <version>2021.10.03</version>
 
   <parent>
     <groupId>org.padaiyal</groupId>
@@ -42,6 +42,7 @@
   <properties>
     <dependency.jI18n.version>2021.01.14</dependency.jI18n.version>
     <dependency.jProperties.version>2021.01.13</dependency.jProperties.version>
+    <dependency.jUnitTestExtras.version>2021.05.30</dependency.jUnitTestExtras.version>
     <dependency.jacksonDataBind.version>2.12.3</dependency.jacksonDataBind.version>
   <dependency.mockito.version>3.7.7</dependency.mockito.version>
   </properties>
@@ -52,15 +53,23 @@
       <artifactId>i18n</artifactId>
       <version>${dependency.jI18n.version}</version>
       <scope>system</scope>
-      <systemPath>${pom.basedir}/i18n-2021.01.14.jar</systemPath>
+      <systemPath>${pom.basedir}/i18n-${dependency.jI18n.version}.jar</systemPath>
     </dependency>
     <dependency>
       <groupId>org.java.padaiyal.utilities</groupId>
       <artifactId>properties</artifactId>
       <version>${dependency.jProperties.version}</version>
       <scope>system</scope>
-      <systemPath>${pom.basedir}/properties-2021.01.13.jar</systemPath>
+      <systemPath>${pom.basedir}/properties-${dependency.jProperties.version}.jar</systemPath>
     </dependency>
+    <dependency>
+      <groupId>org.padaiyal.utilities</groupId>
+      <artifactId>unittestextras</artifactId>
+      <version>${dependency.jUnitTestExtras.version}</version>
+      <scope>system</scope>
+      <systemPath>${pom.basedir}/unittestextras-${dependency.jUnitTestExtras.version}.jar</systemPath>
+    </dependency>
+
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
