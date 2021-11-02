@@ -7,13 +7,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.converter.ConvertWith;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.padaiyal.utilities.aayvalar.testutils.ExceptionClassConverter;
-import org.padaiyal.utilities.aayvalar.testutils.StringArrayConverter;
+import org.padaiyal.utilities.unittestextras.parameterconverters.ArrayConverter;
 
 /**
  * Test Functionality of StatisticsUtilityTest.
@@ -84,7 +86,7 @@ public class StatisticsUtilityTest {
   })
   public void testGetMeanWithValidInputs(String numericType, String collectionType,
       double expectedMean, MeanType meanType,
-      @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      @ConvertWith(ArrayConverter.class) String[] stringValues) {
 
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
@@ -111,7 +113,7 @@ public class StatisticsUtilityTest {
       "double,linkedlist,0.1,'0.1, 0.1, 0.1, 1.5, 2.4, 2.4",
   })
   public void testGetModeWithValidInputs(String numericType, String collectionType,
-      double expectedMode, @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      double expectedMode, @ConvertWith(ArrayConverter.class) String[] stringValues) {
 
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
@@ -140,7 +142,7 @@ public class StatisticsUtilityTest {
       "int,linkedlist,1.5,'0,0,0,0,1,1,2,2,3,4,4,4'"
   })
   public void testGetMedianWithValidInputs(String numericType, String collectionType,
-      double expectedMedian, @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      double expectedMedian, @ConvertWith(ArrayConverter.class) String[] stringValues) {
 
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
@@ -173,7 +175,7 @@ public class StatisticsUtilityTest {
       "double,list,10.245142176304704,HARMONIC,'1.5, 2.3, 0.9, 8.3, 5.1'",
   })
   public void testGetVariance(String numericType, String collectionType, double expectedVariance,
-      MeanType meanType, @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      MeanType meanType, @ConvertWith(ArrayConverter.class) String[] stringValues) {
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
     double roundedVariance = StatisticsUtility.getVariance(inputCollection, meanType);
@@ -207,7 +209,7 @@ public class StatisticsUtilityTest {
   })
   public void testGetStandardDeviation(String numericType, String collectionType,
       double expectedStandardDeviation,
-      MeanType meanType, @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      MeanType meanType, @ConvertWith(ArrayConverter.class) String[] stringValues) {
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
     double standardDeviation = StatisticsUtility.getStandardDeviation(inputCollection, meanType);
@@ -235,8 +237,8 @@ public class StatisticsUtilityTest {
       "double, linkedlist, 2, '0.1,2.4', '0.1,0.1,0.1,1.5,2.4,2.4'",
   })
   public void testGetTopFrequentElements(String numericType, String collectionType, int topNumber,
-      @ConvertWith(StringArrayConverter.class) String[] expectedStringMostFrequentElements,
-      @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      @ConvertWith(ArrayConverter.class) String[] expectedStringMostFrequentElements,
+      @ConvertWith(ArrayConverter.class) String[] stringValues) {
 
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
@@ -271,7 +273,7 @@ public class StatisticsUtilityTest {
       "double, linkedlist, -1.4, '-15.7,-1.4,-10.1,-1.5,-2.4,-100.1'"
   })
   public void testGetMaxValue(String numericType, String collectionType, double expectedMaxValue,
-      @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      @ConvertWith(ArrayConverter.class) String[] stringValues) {
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
 
@@ -299,7 +301,7 @@ public class StatisticsUtilityTest {
       "double, linkedlist, -15.7, '-15.7,-1.4,-10.1,0.1,1.5,2.4,100.1'"
   })
   public void testGetMinValue(String numericType, String collectionType, double expectedMinValue,
-      @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      @ConvertWith(ArrayConverter.class) String[] stringValues) {
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
     double actualMinValue = StatisticsUtility.getMinValue(inputCollection);
@@ -329,8 +331,8 @@ public class StatisticsUtilityTest {
       "double, linkedlist, 5, '-1.4,-1.5,-2.4,-10.1,-15.7', '-15.7,-1.4,-10.1,-1.5,-2.4,-100.1'"
   })
   public void testGetTopMaxValue(String numericType, String collectionType, int topNumber,
-      @ConvertWith(StringArrayConverter.class) String[] expectedStringTopMaxValues,
-      @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      @ConvertWith(ArrayConverter.class) String[] expectedStringTopMaxValues,
+      @ConvertWith(ArrayConverter.class) String[] stringValues) {
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
     Collection<? extends Number> expectedMostFrequentElements = convertToCollection(
@@ -364,8 +366,8 @@ public class StatisticsUtilityTest {
       "double, linkedlist, 3, '-100.1,-15.7,-10.1', '-15.7,-1.4,-10.1,-1.5,-2.4,-100.1'"
   })
   public void testGetTopMinValue(String numericType, String collectionType, int topNumber,
-      @ConvertWith(StringArrayConverter.class) String[] expectedStringTopMaxValues,
-      @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      @ConvertWith(ArrayConverter.class) String[] expectedStringTopMaxValues,
+      @ConvertWith(ArrayConverter.class) String[] stringValues) {
     Collection<? extends Number> inputCollection = convertToCollection(stringValues, numericType,
         collectionType);
     Collection<? extends Number> expectedMostFrequentElements = convertToCollection(
@@ -400,9 +402,9 @@ public class StatisticsUtilityTest {
       "double, linkedlist, '1.1,2.4,2.5,10.0,11.1', '2,1,2,1,1', '1.1,1.1,2.4,2.5,2.5,10.0,11.1'"
   })
   public void testGetFrequency(String numericType, String collectionType,
-      @ConvertWith(StringArrayConverter.class) String[] expectedElements,
-      @ConvertWith(StringArrayConverter.class) String[] expectedElementsFrequency,
-      @ConvertWith(StringArrayConverter.class) String[] stringValues) {
+      @ConvertWith(ArrayConverter.class) String[] expectedElements,
+      @ConvertWith(ArrayConverter.class) String[] expectedElementsFrequency,
+      @ConvertWith(ArrayConverter.class) String[] stringValues) {
 
     List<? extends Number> expectedKeys = (List<? extends Number>) convertToCollection(
         expectedElements, numericType,
@@ -432,15 +434,14 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false, ARITHMETIC, NullPointerException.class",
-      "true, DONOTUSE, IllegalArgumentException.class",
-      "true,,NullPointerException.class"
+      "false, ARITHMETIC, java.lang.NullPointerException",
+      "true, DONOTUSE, java.lang.IllegalArgumentException",
+      "true,,java.lang.NullPointerException"
   })
   public void testGetMeanWithInvalidInput(
       boolean validCollection,
       MeanType meanType,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -458,12 +459,11 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false,NullPointerException.class"
+      "false,java.lang.NullPointerException"
   })
   public void testGetModeWithInvalidInput(
       boolean validCollection,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -480,12 +480,11 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false,NullPointerException.class"
+      "false,java.lang.NullPointerException"
   })
   public void testGetMedianWithInvalidInput(
       boolean validCollection,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -503,15 +502,14 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false, ARITHMETIC, NullPointerException.class",
-      "true, DONOTUSE, IllegalArgumentException.class",
-      "true,,NullPointerException.class"
+      "false, ARITHMETIC, java.lang.NullPointerException",
+      "true, DONOTUSE, java.lang.IllegalArgumentException",
+      "true,,java.lang.NullPointerException"
   })
   public void testGetVarianceWithInvalidInput(
       boolean validCollection,
       MeanType meanType,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -529,15 +527,14 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false, ARITHMETIC, NullPointerException.class",
-      "true, DONOTUSE, IllegalArgumentException.class",
-      "true,,NullPointerException.class"
+      "false, ARITHMETIC, java.lang.NullPointerException",
+      "true, DONOTUSE, java.lang.IllegalArgumentException",
+      "true,,java.lang.NullPointerException"
   })
   public void testGetStandardDeviationWithInvalidInput(
       boolean validCollection,
       MeanType meanType,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -554,12 +551,11 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false,NullPointerException.class"
+      "false,java.lang.NullPointerException"
   })
   public void testGetFrequencyDistributionWithInvalidInput(
       boolean validCollection,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -577,14 +573,13 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false,1,NullPointerException.class",
-      "true,-1,IllegalArgumentException.class"
+      "false,1,java.lang.NullPointerException",
+      "true,-1,java.lang.IllegalArgumentException"
   })
   public void testGetTopFrequentElementsWithInvalidInput(
       boolean validCollection,
       int topNumbers,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -601,12 +596,11 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false,NullPointerException.class"
+      "false,java.lang.NullPointerException"
   })
   public void testGetMaxWithInvalidInput(
       boolean validCollection,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -623,12 +617,11 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false,NullPointerException.class"
+      "false,java.lang.NullPointerException"
   })
   public void testGetMinWithInvalidInput(
       boolean validCollection,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -646,14 +639,13 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false,1,NullPointerException.class",
-      "true,-1,IllegalArgumentException.class"
+      "false,1,java.lang.NullPointerException",
+      "true,-1,java.lang.IllegalArgumentException"
   })
   public void testGetTopMaxElementsWithInvalidInput(
       boolean validCollection,
       int topNumbers,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
@@ -671,18 +663,117 @@ public class StatisticsUtilityTest {
    */
   @ParameterizedTest
   @CsvSource({
-      "false,1,NullPointerException.class",
-      "true,-1,IllegalArgumentException.class"
+      "false,1,java.lang.NullPointerException",
+      "true,-1,java.lang.IllegalArgumentException"
   })
   public void testGetTopMinElementsWithInvalidInput(
       boolean validCollection,
       int topNumbers,
-      @ConvertWith(ExceptionClassConverter.class)
-          Class<? extends Exception> expectedExceptionClass
+      Class<? extends Exception> expectedExceptionClass
   ) {
 
     List<Integer> inputCollection = validCollection ? new ArrayList<>() : null;
     Assertions.assertThrows(expectedExceptionClass,
         () -> StatisticsUtility.getTopMinValues(inputCollection, topNumbers));
+  }
+
+  /**
+   * Convert two String arrays into a numeric two-dimensional array. array1 = {1,2,3} array2 =
+   * {4,5,6} result = {{1,4},{2,5},{3,6}}
+   *
+   * @param horizontalArray The x array.
+   * @param verticalArray   The y array.
+   * @param numericType     The numeric type to convert to.
+   * @return A numeric two-dimensional array from the input arrays.
+   */
+  private Number[][] convertToTwoDimensionalArray(String[] horizontalArray, String[] verticalArray,
+      String numericType) {
+
+    if (horizontalArray.length != verticalArray.length) {
+      throw new IllegalArgumentException();
+    }
+
+    Number[] parsedHorizontalArray = Arrays.stream(horizontalArray).parallel()
+        .map(element -> convertToNumber(numericType, element)).toArray(Number[]::new);
+    Number[] parsedVerticalArray = Arrays.stream(verticalArray).parallel()
+        .map(element -> convertToNumber(numericType, element)).toArray(Number[]::new);
+
+    return IntStream.range(0, horizontalArray.length)
+        .mapToObj(i -> new Number[]{parsedHorizontalArray[i], parsedVerticalArray[i]})
+        .toArray(Number[][]::new);
+  }
+
+  /**
+   * Test calculating the trend of a two-dimensional set with valid inputs.
+   *
+   * @param horizontalArray   The x set to test.
+   * @param verticalArray     The y set to test.
+   * @param expectedTrendType The expected Trend type of the two arrays.
+   */
+  @ParameterizedTest
+  @CsvSource({
+      "'1,223,3','1,4,23',int,UNKNOWN",
+      "'1,1,3', '1,2,3', int, UNKNOWN",
+      "'10000000,10070000,10000000', '1,2,3', long, UNKNOWN",
+
+      // TODO: Uncomment the following after getTrendType is implemented.
+      /*
+      // CONSTANT
+      "'1,1,1', '1,2,3', int, CONSTANT",
+      "'1,2,3', '1,1,1', int, CONSTANT",
+      "'10000000,10000000,10000000', '1,2,3', long, CONSTANT",
+      "'1.5,1.5,1.5', '1,2,3', float, CONSTANT",
+      "'1,2,3', '1.898989822747,1.898989822747,1.898989822747', double, CONSTANT",
+
+      // LINEAR
+      "'1,2,3', '1,2,3', int, LINEAR",
+      "'-1,-2,-3', '1,2,3', int, LINEAR",
+      "'10000000,20000000,30000000', '1,2,3', long, LINEAR",
+      "'1.5,1.8,2.1', '5,10,15', float, LINEAR",
+      "'8,10,12', '1.56565,1.56570,1.56575', double, LINEAR",
+
+      // QUADRATIC
+      "'0,-2,2,3', '0,4,4,9', int, QUADRATIC",
+      "'0,-2,2,3', '0,4,4,9', int, QUADRATIC, long, QUADRATIC",
+      "'1.5,1.8,2.1', '2.25,3.24,4.41', float, QUADRATIC",
+      "'1.5,1.8,2.1', '2.25,3.24,4.41, double, QUADRATIC",
+
+      // EXPONENTIAL
+      "'0,1,2,3', '0,2,4,8', int, EXPONENTIAL",
+      "'0,1,2,3', '0,2,4,8', long, EXPONENTIAL",
+      "'0,-1,-2,-3', '1,0.5,0.25,0.125', float, EXPONENTIAL",
+      "'0,-1,-2,-3', '1,0.5,0.25,0.125', double, EXPONENTIAL"
+       */
+  })
+  public void testCalculateTrendWithValidInput(
+      @ConvertWith(ArrayConverter.class) String[] horizontalArray,
+      @ConvertWith(ArrayConverter.class) String[] verticalArray,
+      String numericType,
+      TrendType expectedTrendType
+  ) {
+    Number[][] inputArray = convertToTwoDimensionalArray(horizontalArray, verticalArray,
+        numericType);
+
+    TrendType actualTrendType = StatisticsUtility.getTrendType(inputArray);
+    Assertions.assertEquals(expectedTrendType, actualTrendType);
+  }
+
+  /**
+   * Test calculating the trend of a two-dimensional set with invalid inputs.
+   */
+  @Test
+  @Disabled
+  public void testCalculateTrendWithInvalidInput() {
+
+    Assertions.assertThrows(
+        NullPointerException.class,
+        () -> StatisticsUtility.getTrendType(null)
+    );
+
+    Assertions.assertThrows(
+        IllegalArgumentException.class,
+        () -> StatisticsUtility.getTrendType(new Integer[][]{})
+    );
+
   }
 }
