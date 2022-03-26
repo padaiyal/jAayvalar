@@ -42,7 +42,7 @@
   <properties>
     <dependency.jI18n.version>2021.01.14</dependency.jI18n.version>
     <dependency.jProperties.version>2021.01.13</dependency.jProperties.version>
-    <dependency.jacksonDataBind.version>2.13.1</dependency.jacksonDataBind.version>
+    <dependency.jacksonDataBind.version>2.13.2.1</dependency.jacksonDataBind.version>
   <dependency.mockito.version>3.7.7</dependency.mockito.version>
   </properties>
 
